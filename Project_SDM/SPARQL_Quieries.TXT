@@ -1,0 +1,145 @@
+1-SELECT ?name ?code ?formula ?use ?normal_range ?biological_target 
+WHERE{
+?name PC:code ?code.
+?name PC:formula ?formula.
+?name PC:use ?use.
+?name PC:normal_range ?normal_range.
+?name PC:biological_target ?biological_target
+}
+
+
+2-SELECT ?name ?code ?formula ?use ?normal_range ?biological_target 
+WHERE{
+?name rdf:type PC:Vitamin_C.
+?name PC:code ?code.
+?name PC:formula ?formula.
+?name PC:use ?use.
+?name PC:normal_range ?normal_range.
+?name PC:biological_target ?biological_target
+}
+
+
+3-SELECT ?name ?aim_of_treatment ?description ?taken_by ?code ?formula ?use ?normal_range ?biological_target
+WHERE{
+{
+?name PC:description ?description.
+?name PC:aim_of_treatment ?aim_of_treatment.
+?name PC:taken_by ?taken_by.
+}
+UNION
+{
+?name rdf:type PC:Vitamin_K.
+?name PC:code ?code.
+?name PC:formula ?formula.
+?name PC:use ?use.
+?name PC:normal_range ?normal_range.
+?name PC:biological_target ?biological_target
+}
+}
+
+
+4-SELECT ?name ?blood_pressure_range
+{
+?name PC:pressure_range ?blood_pressure_range.
+}
+LIMIT 3
+
+
+5-SELECT ?name ?increased_energy ?functions ?benefits ?effects_on_the_body ?causes
+WHERE{
+{
+?name PC:effects_on_the_body ?effects_on_the_body.
+?name PC:causes ?causes
+}
+UNION
+{
+?name PC:increased_energy ?increased_energy.
+?name PC:function ?functions.
+?name PC:benefits ?benefits
+}
+}
+
+
+6-SELECT ?name ?benefits ?increased_energy ?function ?description ?code ?molar_mass ?defintion ?formula
+WHERE{
+{
+?name PC:benefits ?benefits.
+?name PC:increased_energy ?increased_energy.
+?name PC:function ?function
+}
+UNION
+{
+?name PC:description ?description
+FILTER regex(?description,"mustard")
+}
+UNION
+{
+?name PC:code ?code.
+?name PC:formula ?formula.
+?name PC:molar_mass ?molar_mass.
+?name PC:defintion ?defintion
+}
+}
+
+
+
+7-SELECT ?name ?Accession_Number ?Drugs ?Description ?ATC_Classification
+WHERE{
+?name PC:Description ?Description.
+?name PC:ATC_Classification ?ATC_Classification.
+?name PC:Drugs ?Drugs.
+?name PC:Accession_Number ?Accession_Number.
+FILTER(?Accession_Number="DBCAT000410")
+}
+
+
+8-SELECT ?name ?total_fat_mass
+WHERE{
+?name PC:total_fat_mass ?total_fat_mass.
+FILTER(?total_fat_mass < 85)
+}
+
+
+9-SELECT ?name ?how_leptin_controlled ?Problems_with_Leptin ?num_of_years_educated ?stress_Coping ?defintion ?foods_provide ?amount
+WHERE{
+{
+?name PC:how_leptin_controlled ?how_leptin_controlled.
+?name PC:Problems_with_Leptin  ?Problems_with_Leptin .
+}
+UNION
+{
+?name PC:num_of_years_educated  ?num_of_years_educated .
+?name PC:stress_Coping ?stress_Coping.
+FILTER regex(?stress_Coping,"large")
+}
+UNION
+{
+?name PC:amount  ?amount.
+?name PC:foods_provide ?foods_provide.
+?name PC:defintion  ?defintion.
+}
+}
+
+
+10-SELECT ?name ?description ?causes ?symptoms_or_conditions
+WHERE{
+?name PC:description ?description.
+?name PC:causes  ?causes.
+?name PC:symptoms_or_conditions ?symptoms_or_conditions
+}
+
+
+11-SELECT ?subject ?object
+	WHERE { ?subject rdfs:subClassOf ?object }
+
+
+12-SELECT ?subject ?predicate ?object
+	WHERE { ?subject ?predicate ?object }
+LIMIT 20
+OFFSET 35
+
+
+13-SELECT ?x ?y 
+	WHERE { ?x rdf:type ?y}
+LIMIT 250
+
